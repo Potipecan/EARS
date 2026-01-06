@@ -25,7 +25,7 @@ public class ARO extends NumberAlgorithm {
     public boolean isDebug = false;
 
     public ARO(){
-        this(100);
+        this(50);
     }
 
     public ARO(int popSize) {
@@ -68,22 +68,6 @@ public class ARO extends NumberAlgorithm {
             a[i] *= b[i];
         }
         return a;
-    }
-
-    /***
-     * Does this:
-     *     Dim=length(X);
-     *     S=(X>Up)+(X<Low);
-     *     X=(rand(1,Dim).*(Up-Low)+Low).*S+X.*(~S);
-     * @param x array to bound
-     */
-    private void spaceBoundInplace(double[] x){
-        var dim = x.length;
-        for(int i = 0; i < dim; i++){
-            var v = x[i];
-            if (v <= upperBounds.get(i) && v >= lowerBounds.get(i)) continue;
-            x[i] = RNG.nextUniform() * spans.get(i) + lowerBounds.get(i);
-        }
     }
 
     private void initPopulation() throws StopCriterionException{

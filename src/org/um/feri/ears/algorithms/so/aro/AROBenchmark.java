@@ -16,6 +16,7 @@ import org.um.feri.ears.problems.NumberSolution;
 import org.um.feri.ears.problems.StopCriterion;
 import org.um.feri.ears.problems.Task;
 import org.um.feri.ears.problems.unconstrained.*;
+import org.um.feri.ears.util.random.RNG;
 
 import java.io.Console;
 import java.util.ArrayList;
@@ -43,6 +44,25 @@ public class AROBenchmark extends SOBenchmark<NumberSolution<Double>, NumberSolu
         addTask(new RosenbrockD2a(30), stopCriterion, maxIterations, timeLimit, maxIterations);
         addTask(new Step2(30), stopCriterion, maxIterations, timeLimit, maxIterations);
         addTask(new Quartic(30), stopCriterion, maxIterations, timeLimit, maxIterations);
+    }
+}
+
+class SphereBenchmark extends SOBenchmark<NumberSolution<Double>, NumberSolution<Double>, DoubleProblem, NumberAlgorithm>{
+    public SphereBenchmark() {
+        super();
+        stopCriterion = StopCriterion.ITERATIONS;
+        maxIterations = 1000;
+        maxEvaluations = 0;
+        timeLimit = 0;
+    }
+    @Override
+    protected void addTask(DoubleProblem problem, StopCriterion stopCriterion, int maxEvaluations, long time, int maxIterations) {
+        tasks.add(new Task<>(problem, stopCriterion, maxEvaluations, time, maxIterations));
+    }
+
+    @Override
+    public void initAllProblems() {
+        addTask(new Sphere(30), stopCriterion, maxIterations, timeLimit, maxIterations);
     }
 }
 
@@ -89,6 +109,12 @@ class AroBenchmarkRun{
                 algoritms = getTestAlgorithms();
                 break;
             }
+            case "fixed-gen": {
+                RNG.setSelectedRandomGenerator(RNG.RngType.PREDEFINED_RANDOM);
+                algoritms = new ArrayList<>();
+                algoritms.add(new ARO());
+                bench = new SphereBenchmark();
+            }
             default:{
                 System.exit(1);
             }
@@ -102,7 +128,5 @@ class AroBenchmarkRun{
 
 
         bench.run(10);
-        bench.
-//        System.exit(0);
     }
 }
