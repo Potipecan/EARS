@@ -4,7 +4,6 @@ import org.um.feri.ears.algorithms.GPAlgorithm;
 import org.um.feri.ears.algorithms.gp.ElitismGPAlgorithm;
 import org.um.feri.ears.individual.representations.gp.Node;
 import org.um.feri.ears.individual.representations.gp.Target;
-import org.um.feri.ears.individual.representations.gp.behaviour.tree.RootNode;
 import org.um.feri.ears.individual.representations.gp.symbolic.regression.*;
 import org.um.feri.ears.problems.StopCriterion;
 import org.um.feri.ears.problems.StopCriterionException;
@@ -15,10 +14,9 @@ import org.um.feri.ears.problems.gp.SymbolicRegressionProblem;
 import org.um.feri.ears.util.random.RNG;
 
 import java.io.*;
-import java.nio.file.FileSystem;
 import java.util.*;
 
-public class SymbolicRegressionEarthquakes {
+public class SymbolicRegressionEnergyEfficiency {
     public static String DatasetPath = "datasets/ENB2012_data.csv";
     public static String Delimiter = ",";
     public static String[] XVars = {"X1", "X2", "X3", "X4", "X5", "X6", "X7", "X8"};
